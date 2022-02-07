@@ -2,7 +2,19 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import Basic1 from './components/Basic1'
+import Basic2 from './components/Basic2'
+import Basic3 from './components/Basic3'
+import Basic4 from './components/BasicUseEffect'
+import TimerContainer from './components/TimerContainer'
+import ApiFetch from './components/ApiFetch'
 import UserData from './data.json'
+import AppContext from './contexts/AppContext'
+import B from './components/B'
+import BasicReducer from './components/BasicReducer'
+import CompB from './components/CompB'
+import Memo from './components/Memo'
+
+import { useReducer } from 'react'
 
 // Json 型推論
 type USERS = typeof UserData
@@ -172,15 +184,41 @@ const funcGen4 = <T extends Props>(props: T) => {
   return { value: props.price }
 }
 
+const initialState = 0
+// actionはdispatchの引数
+const reducer = (currentState: number, action: string): number => {
+  switch (action) {
+    case 'add_1':
+      return currentState + 1
+    case 'multiple_3':
+      return currentState * 3
+    case 'reset':
+      return initialState
+    default:
+      return currentState
+  }
+}
 // 関数にReact.VFCという型を付ける
 const App: React.VFC = () => {
+  const [count, dispatch] = useReducer(reducer, initialState)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Basic1 text="noir" />
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{ countProvided: count, dispatchProvided: dispatch }}
+    >
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          {/* <Basic1 text="noir" /> */}
+          {/* <TimerContainer /> */}
+          {/* <ApiFetch /> */}
+          {/* <B /> */}
+          <BasicReducer />
+          {/* Count {count}
+          <CompB /> */}
+          {/* <Memo /> */}
+        </header>
+      </div>
+    </AppContext.Provider>
   )
 }
 

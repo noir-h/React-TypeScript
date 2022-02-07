@@ -6,8 +6,7 @@ type ACTIONTYPE =
   | { type: 'increment'; payload: number }
   | { type: 'decrement'; payload: string }
 
-// actionはdispatchの引数
-// stateは現在のstateが取れる
+// callback = (state, action)
 const reducer = (count: typeof initialCount, action: ACTIONTYPE) => {
   switch (action.type) {
     case 'increment':
@@ -20,6 +19,7 @@ const reducer = (count: typeof initialCount, action: ACTIONTYPE) => {
 }
 
 const BasicReducer = () => {
+  // useReducer(callback, 初期値)
   const [count, dispatch] = React.useReducer(reducer, initialCount)
   return (
     <>

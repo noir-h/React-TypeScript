@@ -208,11 +208,11 @@ const App: React.VFC = () => {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          {/* <Basic1 text="noir" /> */}
+          <Basic1 text="noir" />
           {/* <TimerContainer /> */}
           {/* <ApiFetch /> */}
           {/* <B /> */}
-          <BasicReducer />
+          {/* <BasicReducer /> */}
           {/* Count {count}
           <CompB /> */}
           {/* <Memo /> */}
